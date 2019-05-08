@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3DC12BE6C514A35E65D3F103 /* Pods_RandomNumber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39091EF1B2AE1CB81C638EBA /* Pods_RandomNumber.framework */; };
+		4A0C24DB22829B55002B92F7 /* WinNumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0C24DA22829B55002B92F7 /* WinNumberCell.swift */; };
+		4A0C24DD2282AC51002B92F7 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0C24DC2282AC51002B92F7 /* DBManager.swift */; };
 		4A13B5B6228139A7009B8721 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A13B5B5228139A7009B8721 /* LoadingView.swift */; };
 		4AE04B0C227ADA1600FF0491 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE04B0B227ADA1600FF0491 /* AppDelegate.swift */; };
 		4AE04B0E227ADA1600FF0491 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE04B0D227ADA1600FF0491 /* ViewController.swift */; };
@@ -21,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		39091EF1B2AE1CB81C638EBA /* Pods_RandomNumber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RandomNumber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A0C24DA22829B55002B92F7 /* WinNumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinNumberCell.swift; sourceTree = "<group>"; };
+		4A0C24DC2282AC51002B92F7 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		4A13B5B5228139A7009B8721 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		4AE04B08227ADA1600FF0491 /* RandomNumber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomNumber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AE04B0B227ADA1600FF0491 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 				4AE04B12227ADA1600FF0491 /* RandomNumber.xcdatamodeld */,
 				4AF8FA9F227C370100526FC2 /* Utils.swift */,
 				4A13B5B5228139A7009B8721 /* LoadingView.swift */,
+				4A0C24DA22829B55002B92F7 /* WinNumberCell.swift */,
+				4A0C24DC2282AC51002B92F7 /* DBManager.swift */,
 			);
 			path = RandomNumber;
 			sourceTree = "<group>";
@@ -223,9 +229,11 @@
 				4AE04B21227ADC3900FF0491 /* SelectViewController.swift in Sources */,
 				4AE04B0E227ADA1600FF0491 /* ViewController.swift in Sources */,
 				4AF8FAA0227C370100526FC2 /* Utils.swift in Sources */,
+				4A0C24DD2282AC51002B92F7 /* DBManager.swift in Sources */,
 				4AE04B0C227ADA1600FF0491 /* AppDelegate.swift in Sources */,
 				4AE04B14227ADA1600FF0491 /* RandomNumber.xcdatamodeld in Sources */,
 				4A13B5B6228139A7009B8721 /* LoadingView.swift in Sources */,
+				4A0C24DB22829B55002B92F7 /* WinNumberCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

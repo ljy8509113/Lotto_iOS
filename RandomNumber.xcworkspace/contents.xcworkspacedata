@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:RandomNumber/Saved+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:RandomNumber/Saved+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
       location = "group:RandomNumber/Entity/Win+CoreDataClass.swift">
    </FileRef>
    <FileRef
