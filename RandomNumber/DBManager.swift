@@ -59,4 +59,13 @@ class DBManager: NSObject {
             return nil
         }
     }
+    
+    func entityCount(entityName:String) -> Int {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+        do {
+            return try Utils.getContext()?.count(for: fetchRequest) ?? 0
+        }catch{
+            return 0
+        }
+    }
 }

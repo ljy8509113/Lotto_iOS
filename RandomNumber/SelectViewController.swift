@@ -29,8 +29,7 @@ class SelectViewController: UIViewController {
         for i in 1...max {
             arrayNumber.append(i)
         }
-        arrayWin = DBManager.shared.fetch(entityName: "Win", limit: 50)
-        arraySaved = DBManager.shared.fetch(entityName: "Saved")
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.saveTableView.delegate = self
@@ -41,9 +40,78 @@ class SelectViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let last = arrayWin?.first as! Win
-        LoadingView.shared.show()
-        request(currentIndex: Int(last.no))
+        ConnectionManager.shared.checkNumber {
+            self.arrayWin = DBManager.shared.fetch(entityName: "Win", limit: 50)
+            self.arraySaved = DBManager.shared.fetch(entityName: "Saved")
+            
+            var pred = NSPredicate(format: "result == ''")
+            let arrayNoCheck = DBManager.shared.select(entityName: "Saved", pred: pred)
+            
+            if let arrayNoCheck = arrayNoCheck {
+                var noSet = Set<Int>()
+                for value in arrayNoCheck {
+                    noSet.insert(Int((value as! Saved).no))
+                }
+                
+                for no in noSet {
+                    pred = NSPredicate(format: "no == %d", no)
+                    if let result = DBManager.shared.select(entityName: "Win", pred: pred) {
+                       self.checkResult(result: (result[0] as! Win))
+                    }else{
+                        self.saveTableView.reloadData()
+                    }
+                }
+            }else{
+                self.saveTableView.reloadData()
+            }
+        }
+        
+//        let last = arrayWin?.first as! Win
+//        LoadingView.shared.show()
+//        request(currentIndex: Int(last.no))
+    }
+    
+    func checkResult(result:Win){
+        let pred = NSPredicate(format: "no == %d", result.no)
+        let array = DBManager.shared.select(entityName: "Saved", pred: pred)
+        if let array = array{
+            for v in array {
+                let vc = (v as! Saved)
+                var match:Int = 0
+                
+                if vc.nm1 == result.nm1 {
+                    match += 1
+                }
+                if vc.nm2 == result.nm2 {
+                    match += 1
+                }
+                if vc.nm3 == result.nm3 {
+                    match += 1
+                }
+                if vc.nm4 == result.nm4 {
+                    match += 1
+                }
+                if vc.nm5 == result.nm5 {
+                    match += 1
+                }
+                if vc.nm6 == result.nm6 {
+                    match += 1
+                }
+                
+                switch match {
+                case 3 :
+                    break
+                case 4:
+                    break
+                case 5:
+                    break
+                case 6:
+                    break
+                default:
+                    break
+                }
+            }
+        }
     }
     
     @IBAction func makeNumber(_ sender: Any) {
@@ -107,28 +175,28 @@ class SelectViewController: UIViewController {
         
     }
     
-    func request(currentIndex:Int){
-        let url:String = "https://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo="
-        let index = currentIndex + 1
-        let requestUrl:String = "\(url)\(index)"
-        
-        Alamofire.request(requestUrl, method: .get, parameters: [:], encoding: URLEncoding.default, headers: ["Content-Type":"application/json", "Accept":"application/json"]).validate(statusCode: 200..<300).responseJSON(completionHandler: {
-            response in
-            if let value:Dictionary = response.result.value as? Dictionary<String, Any> {
-                print(value)
-                if value["returnValue"] as! String == "success" {
-                    self.request(currentIndex: index)
-                }else{
-                    //fail
-                    self.currentNo = index
-                    LoadingView.shared.hide()
-                }
-            }else{
-                LoadingView.shared.hide()
-            }
-        })
-    }
-    
+//    func request(currentIndex:Int){
+//        let url:String = "https://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo="
+//        let index = currentIndex + 1
+//        let requestUrl:String = "\(url)\(index)"
+//
+//        Alamofire.request(requestUrl, method: .get, parameters: [:], encoding: URLEncoding.default, headers: ["Content-Type":"application/json", "Accept":"application/json"]).validate(statusCode: 200..<300).responseJSON(completionHandler: {
+//            response in
+//            if let value:Dictionary = response.result.value as? Dictionary<String, Any> {
+//                print(value)
+//                if value["returnValue"] as! String == "success" {
+//                    self.request(currentIndex: index)
+//                }else{
+//                    //fail
+//                    self.currentNo = index
+//                    LoadingView.shared.hide()
+//                }
+//            }else{
+//                LoadingView.shared.hide()
+//            }
+//        })
+//    }
+//
 //    func fetch() -> [NSManagedObject]? {
 //        guard let managedContext = Utils.getContext() else {
 //            return nil
@@ -268,7 +336,7 @@ extension SelectViewController:UITableViewDelegate {
             headerView.label_4.text = "4"
             headerView.label_5.text = "5"
             headerView.label_6.text = "6"
-            headerView.label_7.text = ""
+            headerView.label_7.text = "결과"
             return headerView
         }else{
             return nil
